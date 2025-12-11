@@ -19,28 +19,30 @@ services:
       retries: 5
       start_period: 60s
 
-  flask-app:
-    image: trainwithshubham/two-tier-flask-app:latest
-    container_name: flask-app
-    ports:
-      - "5000:5000"
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
-      MYSQL_DB: devops
-    depends_on:
-      mysql:
-        condition: service_healthy
-    networks:
-      - twotier
-    restart: always
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:5000/health || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
+ flask-app:
+  build: .
+  image: my-flask-app:latest
+  container_name: flask-app
+  ports:
+    - "5000:5000"
+  environment:
+    MYSQL_HOST: mysql
+    MYSQL_USER: admin
+    MYSQL_PASSWORD: admin
+    MYSQL_DB: devops
+  depends_on:
+    mysql:
+      condition: service_healthy
+  networks:
+    - twotier
+  restart: always
+  healthcheck:
+    test: ["CMD-SHELL", "curl -f http://localhost:5000/health || exit 1"]
+    interval: 10s
+    timeout: 5s
+    retries: 5
+    start_period: 30s
 
+  
 networks:
   twotier:
