@@ -14,14 +14,14 @@ pipeline{
         stage("docker push"){
             steps{
                 withCredentials([usernamePassword(
-                    credentialsId:"dockerHubCreds",
-                    passwordVariable: "dockerHubpass",
-                    usernameVariable: "dockerHubUser"
+                    credentialsId:"DockerHubCreds",
+                    passwordVariable: "dockerhubpass",
+                    usernameVariable: "dockerhubuser"
                 )])
                 {
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubpass}"
-                sh "docker image tag two-tier-flask-app ${env.dockerHubUser}/two-tier-flask-app:latest"
-                sh "docker push ${env.dockerHubUser}/two-tier-flask-app:latest"
+                sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubpass}"
+                sh "docker image tag two-tier-flask-app ${env.dockerhubuser}/two-tier-flask-app:latest"
+                sh "docker push ${env.dockerhubuser}/two-tier-flask-app:latest"
             
                 }    
             }
