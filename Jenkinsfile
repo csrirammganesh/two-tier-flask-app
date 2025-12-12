@@ -16,7 +16,7 @@ pipeline{
                 withCredentials([usernamePassword(
                     credentialsId: "DockerHubCreds",
                     usernameVariable: "dockerhubuser",
-                    usernameVariable: "dockerhubpass"
+                    passwordVariable: "dockerhubpass"
                 )]){
                 sh "docker login -u ${env.dockerhubuser} -p ${env.dockerhubpass}"
                 sh "docker image tag two-tier-flask-app ${env.dockerhubuser}/two-tier-flask-app"
