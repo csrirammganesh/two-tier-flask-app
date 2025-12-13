@@ -14,7 +14,7 @@ pipeline{
         stage("docker push"){
             steps{
                 withCredentials([usernamePassword(
-                    credentialsId: "DockerHubCreds",
+                    credentialsId: "DockerHubUser",
                     usernameVariable: "dockerhubuser",
                     passwordVariable: "dockerhubpass"
                 )]){
