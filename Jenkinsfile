@@ -20,7 +20,7 @@ pipeline{
                 )]){
                 sh "docker login -u ${env.dockerhubuser} -p ${env.dockerhubpass}"
                 sh "docker image tag two-tier-sriram-app ${env.dockerhubuser}/two-tier-sriram-app"
-                sh "docker push ${env.dockerhubuser}/two-tier-flask-app:latest"
+                sh "docker push ${env.dockerhubuser}/two-tier-sriram-app:latest"
               }
             }
         }
